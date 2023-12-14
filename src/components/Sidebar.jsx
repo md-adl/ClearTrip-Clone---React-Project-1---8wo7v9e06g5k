@@ -1,36 +1,34 @@
 import React from "react";
-import { Stack } from "@mui/material";
-
+import { Stack, Box } from "@mui/material";
+import { Link } from 'react-router-dom';
+import { Button } from "@mui/material";
 import { categories } from "../utils/constant";
 
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => (
   <Stack
     direction="row"
     sx={{
-      overflowY: "auto",
-      height: { sx: "auto", md: "95%" },
+      padding: "20px",
+      width: { sx: "auto", md: "20vw" },
+      height: { sx: "auto", md: "90%" },
       flexDirection: { md: "column" },
     }}
   >
     {categories.map((category) => (
-      <button
-        className="category-btn"
+      <Button to={`/${category.name}`} component={Link}
         onClick={() => setSelectedCategory(category.name)}
-        style={{
-          background: category.name === selectedCategory && "#D6E8FC",
-          color: "black",
+        size="large"
+        startIcon={category.icon} sx={{
+          className: "category-btn", marginBottom: "10px", justifyContent: "flex-start", color: category.name === selectedCategory ? "#36c" : "black", backgroundColor: category.name === selectedCategory ? "#D5E7FC" : null, ":hover": {
+            background: category.name === selectedCategory ? "#D5E7FC" : "#EFF5FB",
+            color: "#36c"
+          },
         }}
-        key={category.name}
       >
-        <span style={{ color: category.name === selectedCategory ? "#36c" : "black", marginRight: "15px" }}>
-          {category.icon}
-        </span>
-        <span style={{ opacity: category.name === selectedCategory ? "1" : "0.8",color: category.name === selectedCategory ? "#36c" : "" }}>
-          {category.name}
-        </span>
-      </button>
+        {category.name}
+      </Button>
     ))}
-  </Stack>
+  </Stack >
 );
 
 export default Sidebar;
