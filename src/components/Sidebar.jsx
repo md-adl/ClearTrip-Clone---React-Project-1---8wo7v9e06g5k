@@ -2,9 +2,8 @@ import React from "react";
 import { Stack, Box } from "@mui/material";
 import { Link } from 'react-router-dom';
 import { Button } from "@mui/material";
-import { categories } from "../utils/constant";
 
-const Sidebar = ({ selectedCategory, setSelectedCategory }) => (
+const Sidebar = ({ isAccount, categories, selectedCategory, setSelectedCategory }) => (
   <Stack
     direction="row"
     sx={{
@@ -15,8 +14,9 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => (
     }}
   >
     {categories.map((category) => (
-      <Button to={`/${category.name}`} component={Link}
+      <Button to={`/${isAccount ? "account/" : ""}${category.name.toLowerCase()}`} component={Link}
         onClick={() => setSelectedCategory(category.name)}
+        key={category.name}
         size="large"
         startIcon={category.icon} sx={{
           className: "category-btn", marginBottom: "10px", justifyContent: "flex-start", color: category.name === selectedCategory ? "#36c" : "black", backgroundColor: category.name === selectedCategory ? "#D5E7FC" : null, ":hover": {

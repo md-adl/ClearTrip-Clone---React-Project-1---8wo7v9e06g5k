@@ -1,4 +1,4 @@
-
+import React, { useState } from 'react'
 
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -9,20 +9,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { cities } from "../utils/constant";
-import { searchHotels } from '../utils/fetchFromApi';
-import { Link} from 'react-router-dom';
-
-import { useState} from 'react';
+import { Link } from 'react-router-dom';
+import { searchHotel } from '../utils/fetchFromApi';
 
 const Hotel = () => {
-  const [loading, setLoading] = useState(false); 
-  const [hotelList,SetHotelList ] =useState({ data: { hotels: [] } });
-  const [location , setLocation] = useState([cities[0]])
+  const [loading, setLoading] = useState(false);
+  const [hotelList, SetHotelList] = useState({ data: { hotels: [] } });
+  const [location, setLocation] = useState([cities[0]])
   // const navigate = useNavigate();
   const searchAndSetHotelList = async () => {
     try {
       setLoading(true);
-      const object = await searchHotels(
+      const object = await searchHotel(
         location.name
       );
 
@@ -52,7 +50,6 @@ const Hotel = () => {
             } else {
               setLocation('');
             }
-            // console.log('Selected Value:', newSource);
           }}
           options={cities.map((option) => option.name)}
           sx={{ minWidth: 600 }}
@@ -75,7 +72,7 @@ const Hotel = () => {
           </LocalizationProvider>
         </Stack>
 
-        <Button variant="contained"  component={Link} to={"/hotels/results"} state={{location:location.name}}>Search Hotels</Button>
+        <Button variant="contained" component={Link} to={"/hotel/result"} state={{ location: location.name }}>Search Hotels</Button>
       </Stack>
     </Stack>
   )

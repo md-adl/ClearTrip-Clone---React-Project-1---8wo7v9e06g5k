@@ -64,3 +64,33 @@ body {
   justify-content: center;
   width: 100%;
 }
+
+.flex-center-center {
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+}
+
+.flex-start-center {
+  display: "flex";
+  justify-content: "start";
+  align-items: "center";
+}
+
+.flex-end-center {
+  display: "flex";
+  justify-content: "end";
+  align-items: "center";
+}
+
+.flex-center-end {
+  display: "flex";
+  justify-content: "center";
+  align-items: "end";
+}
+
+.flex-center-start {
+  display: "flex";
+  justify-content: "center";
+  align-items: "start";
+}

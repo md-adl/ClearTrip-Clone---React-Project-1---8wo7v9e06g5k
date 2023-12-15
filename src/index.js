@@ -22,9 +22,16 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import Hotel from "./components/Hotel";
-import HotelResult from "./components/HotelResult";
-import HotelDetails from "./components/HotelDetails";
+import { AuthProvider } from "./utils/auth";
 import FlightCheckOut from "./components/FlightCheckOut";
+import HotelResult from "./components/HotelResult";
+import HotelDetail from "./components/HotelDetails";
+import { BookingContextProvider } from "./utils/bookingContext";
+import PaymentForm from "./components/PaymentForm";
+import UserBookings from "./components/UserBookings";
+import UserProfile from "./components/UserProfile";
+import Account from "./components/Account";
+import HotelDetails from "./components/HotelDetails";
 
 const router = createBrowserRouter([
   {
@@ -49,29 +56,58 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "flights/results",
+    path: "account",
+    element: <Account />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/account",
+        element: <UserBookings />,
+        children: [{
+          path: "/account/bookings",
+          element: <UserBookings />,
+        },
+        ]
+      },
+      {
+        path: "/account/profile",
+        element: <UserProfile />,
+      },
+    ],
+  },
+  {
+    path: "flight/result",
     element: <FlightResult />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "hotels/results",
+    path: "hotel/result",
     element: <HotelResult />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "hotels/results/detail",
+    path: "flight/checkout",
+    element: <FlightCheckOut />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "hotel/detail",
     element: <HotelDetails />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "flights/results/checkout",
-    element: <FlightCheckOut />,
+    path: "flight/checkout/payment",
+    element: <PaymentForm />,
     errorElement: <ErrorPage />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <BookingContextProvider>
+        <RouterProvider router={router} />
+      </BookingContextProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

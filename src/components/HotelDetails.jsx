@@ -1,58 +1,65 @@
-import { Box, Button, Stack, Typography,CircularProgress } from "@mui/material";
-import { useLocation ,Link} from "react-router-dom";
-import HotelsHeader from "./HotelsHeader";
-import { Paper, Grid, Card, CardContent, CardMedia } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Stack, Typography, CircularProgress } from "@mui/material";
+import { useLocation, Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
-import { useEffect } from "react";
-import { searchHotels } from "../utils/fetchFromApi";
-import { useState } from "react";
-import HotelHeader from "./HotelsHeader";
+import { searchHotel } from "../utils/fetchFromApi";
+import Navbar from "./Navbar";
 
-const HotelResult = () => {
-  
-  const [hotelList,SetHotelList]=useState([])
-  const [loading, setLoading] = useState(true)
-  const location = useLocation();
-  const searchParam = location.state;
-  console.log(searchParam);
+const HotelDetails = () => {
+    const [hotelList, setHotelList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    const hotelData = location.state;
 
-  // Check if hotelList is null or undefined
-  useEffect(() => {
-    const searchAndSetFlightList = async () => {
-        try {
-            setLoading(true);
+    console.log(hotelData.item.name);
 
-            const object = await searchHotels(
-                searchParam.location
-            );
+    // useEffect(() => {
+    //     const searchAndSetHotelList = async () => {
+    //         try {
+    //             setLoading(true);
 
-            if (object !== null) {
-              SetHotelList(object.data.hotels);
-                console.log(object.data.hotels);
-            }
-        } catch (error) {
-            console.error('An error occurred:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-    searchAndSetFlightList();
-}, [location.name]);
-  return (
-   <Stack>
-       <HotelHeader/>
-       <Stack direction="row">
-        <Stack direction="column">
-         {hotelList.name}
+    //             const object = await searchHotel(searchParam.location, searchParam.hotelData.id);
+    //             if (object !== null) {
+    //                 setHotelList(object.data.hotels);
+    //                 console.log(object.data.hotels);
+    //             }
+    //         } catch (error) {
+    //             console.error("An error occurred:", error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     searchAndSetHotelList();
+    // }, []);
+
+    return (
+        <Stack>
+            <Navbar />
+            {loading ? (
+                // Show loading spinner while data is being fetched
+                <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+                    <CircularProgress />
+                </Box>
+            ) : (
+                // Render hotel details once data is loaded
+                <Stack direction="row">
+                    <Stack direction="column">
+                        {hotelData.map((hotel) => (
+                            <div key={hotel.id}>
+                                <Typography variant="h6">{hotel.item.name}</Typography>
+                                {/* Add other hotel details here */}
+                            </div>
+                        ))}
+                    </Stack>
+                    <Stack direction="column">
+                        {/* Add additional content here if needed */}
+                    </Stack>
+                </Stack>
+            )}
         </Stack>
-        <Stack direction="column">
+    );
+};
 
-        </Stack>
-
-       </Stack>
-   </Stack>
-  )
-}
-
-export default HotelResult
+export default HotelDetails;

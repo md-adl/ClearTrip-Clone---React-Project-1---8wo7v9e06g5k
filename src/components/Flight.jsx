@@ -1,80 +1,38 @@
-import {useState } from "react";
-import { searchFlight } from "../utils/fetchFromApi";
+import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
-import { Box, Button, IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import dayjs from 'dayjs';
-import CircularProgress from '@mui/material/CircularProgress';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { cities } from "../utils/constant";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useBookingContext } from "../utils/bookingContext";
 
 
 export const Flight = () => {
+
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const [source, setSource] = useState(cities[0]);
   const [destination, setDestination] = useState(cities[1]);
   const [departureDate, setDepartureDate] = useState(dayjs());
   const [returnDate, setReturnDate] = useState(dayjs());
-
-  const [flightList, setFlightList] = useState({ data: { flights: [] } });
-
-  const [loading, setLoading] = useState(false);
-
   const [selectedValue, setSelectedValue] = useState("One Way");
+  const { bookingValues, setType, setId, setStartDate, setEndDate, setPrice } = useBookingContext();
 
   const handleRoundTrip = (event) => {
     setIsRoundTrip(event.target.value)
   };
 
-  const searchAndSetFlightList = async () => {
-    try {
-      setLoading(true);
-
-      const object = await searchFlight(
-        source.code,
-        destination.code,
-        dayjs(departureDate).format('ddd')
-      );
-
-      if (object !== null) {
-        setFlightList(object);
-        // navigate("/flights/results", { state: object.data.flights });
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  // const searchAndSetFlightList = async () => {
-  //   try {
-  //     setLoading(true);
-
-  //     const object = await searchFlight(
-  //       source.code,
-  //       destination.code,
-  //       dayjs(departureDate).format('ddd')
-  //     );
-
-  //     if (object !== null) {
-  //       setFlightList(object);
-  //     }
-  //   } catch (error) {
-  //     console.error('An error occurred:', error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  useEffect(() => {
+    setStartDate(departureDate.toISOString)
+  }, [departureDate]);
 
   return (
     <Stack>
@@ -110,7 +68,7 @@ export const Flight = () => {
           </FormControl>
 
         </Stack>
-        <Stack direction="row"  >
+        <Stack direction="column" sx={{ flexDirection: { md: "row" } }}  >
           <Autocomplete
             id="source"
             freeSolo
@@ -122,10 +80,9 @@ export const Flight = () => {
               } else {
                 setSource('');
               }
-              // console.log('Selected Value:', newSource);
             }}
             options={cities.map((option) => option.name)}
-            sx={{ minWidth: 300 }}
+            sx={{ minWidth: { md: 300 } }}
             renderInput={(params) => (
               <TextField {...params} label="Where from?" />
             )}
@@ -146,7 +103,7 @@ export const Flight = () => {
               }
             }}
             options={cities.map((option) => option.name)}
-            sx={{ minWidth: 300 }}
+            sx={{ minWidth: { md: 300 } }}
             renderInput={(params) => (
               <TextField {...params} label="Where to?" />
             )}
@@ -163,7 +120,7 @@ export const Flight = () => {
               }}
             />
           </LocalizationProvider>
-          <Button variant="contained" component={Link} to={"/flights/results"} state={{source:source.code, destination:destination.code , day:dayjs(departureDate).format('ddd')}}> Search Flight</Button>
+          <Button variant="contained" component={Link} to="/flight/result" state={{ source: source.code, destination: destination.code, day: dayjs(departureDate).format('ddd') }}  >Search Flight</Button>
         </Stack>
       </Stack>
     </Stack>

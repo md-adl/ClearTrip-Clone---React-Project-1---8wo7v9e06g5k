@@ -9,16 +9,24 @@ import SupportIcon from '@mui/icons-material/Support';
 export const categories = [
   { name: 'Flights', icon: <FlightIcon />, },
   { name: 'Hotels', icon: <HotelIcon />, },
-  { name: 'Bus', icon: <BusIcon />, },
   { name: 'Offers', icon: <OfferIcon />, },
-  { name: 'Support', icon: <SupportIcon />, },
+  { name: 'My Trips', icon: <WorkIcon />, },
 ];
+
+export const accountCategories = [
+  { name: 'Bookings', icon: <FlightIcon />, },
+  { name: 'Profile', icon: <HotelIcon />, },
+  { name: 'Logout', icon: <OfferIcon />, },
+];
+
 export const cities = [
-  { name: 'New Delhi', code: "DEl" },
+  { name: 'delhi', code: "DEL" },
   { name: 'Bengluru', code: "BLR" },
   { name: 'Mumbai', code: "BOM" },
-  { name: 'Kolkata', code: "CUT" },
-  { name: 'Chennai', code: "Chennai" },
+  { name: 'Kolkata', code: "CCU" },
+  { name: 'Chennai', code: "MAA" },
   { name: 'Patna', code: "PAT" },
   { name: 'Chandigarh', code: "CGH" },
+  { name: 'Jaipur', code: "JAI" },
+  { name: 'Goa', code: "GOI" },
 ]
