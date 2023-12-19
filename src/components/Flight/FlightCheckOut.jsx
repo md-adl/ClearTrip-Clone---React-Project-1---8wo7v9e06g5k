@@ -20,8 +20,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import AirlinesIcon from '@mui/icons-material/Airlines';
 import QueryBuilderOutlinedIcon from "@mui/icons-material/QueryBuilderOutlined";
-import { cities } from '../utils/constant';
-import { useBookingContext } from '../utils/bookingContext';
+import { cities } from '../../utils/constant';
+import { useBookingContext } from '../../utils/bookingContext';
+import Navbar from '../Home/Navbar'
 
 
 
@@ -97,7 +98,9 @@ const FlightCheckOut = () => {
 
     useEffect(() => {
         if (bookingValues.id && bookingValues.id === flightData.item._id) {
-            navigate("payment");
+            navigate("payment", {state:{
+                flightItem: flightData.item,
+            }});
         }
     }, [bookingValues.id, flightData.item._id, navigate]);
 
@@ -122,6 +125,8 @@ const FlightCheckOut = () => {
     };
 
     return (
+        <Stack>
+            <Navbar/>
         <Stack direction="row" px={20} py={10}>
             <Box sx={{ width: "70%" }}>
                 <Stepper p={0} activeStep={activeStep} orientation="vertical" sx={{
@@ -384,16 +389,16 @@ const FlightCheckOut = () => {
                     <Stack>2 seat left</Stack>
                     <Stack direction="row" justifyContent="space-between">
                         <Box>Total price</Box>
-                        <Box>2250</Box>
+                        <Box> {flightData.item.ticketPrice}</Box>
                     </Stack>
                     <Divider orientation="horizontal" width="100%" />
                     <Stack direction="row" justifyContent="space-between">
                         <Box>Base fare</Box>
-                        <Box>1550</Box>
+                        <Box>{flightData.item.ticketPrice-750}</Box>
                     </Stack>
                     <Stack direction="row" justifyContent="space-between">
                         <Box>Taxes and fees</Box>
-                        <Box>2250</Box>
+                        <Box>750</Box>
                     </Stack>
                     <Stack direction="row" justifyContent="space-between">
                         <Box>Add ons</Box>
@@ -406,6 +411,8 @@ const FlightCheckOut = () => {
                 </Box>
             </Stack>
         </Stack >
+
+        </Stack>
     );
 }
 

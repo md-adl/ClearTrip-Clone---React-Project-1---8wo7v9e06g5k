@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { cities } from "../utils/constant";
+import { cities } from "../../utils/constant";
 import { Link } from 'react-router-dom';
-import { searchHotel } from '../utils/fetchFromApi';
+import { searchHotel } from '../../utils/fetchFromApi';
 
 const Hotel = () => {
   const [loading, setLoading] = useState(false);
@@ -64,12 +64,12 @@ const Hotel = () => {
               value={dayjs()}
             />
           </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker format='ddd, MMM D'
               defaultValue={dayjs().add(1, 'day')}
               value={dayjs().add(1, 'day')}
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
         </Stack>
 
         <Button variant="contained" component={Link} to={"/hotel/result"} state={{ location: location.name }}>Search Hotels</Button>

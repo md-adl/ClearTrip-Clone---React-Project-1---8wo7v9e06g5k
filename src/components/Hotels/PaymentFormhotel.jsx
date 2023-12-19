@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button, CircularProgress, Stack, Box, Divider, Modal, Tab, Tabs, TextField, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import QRCode from 'qrcode.react';
-import { useNavigate } from 'react-router-dom';
-import { postUserBooking } from '../utils/fetchFromApi';
-import { useAuth } from "../utils/auth";
-import { useBookingContext } from '../utils/bookingContext';
-import Navbar from './Navbar'
+import { useNavigate,useLocation } from 'react-router-dom';
+import { postUserBooking } from '../../utils/fetchFromApi';
+import { useAuth } from "../../utils/auth";
+import { useBookingContext } from '../../utils/bookingContext';
+import Navbar from '../Home/Navbar'
 
 const PaymentForm = () => {
     const [paymentMethod, setPaymentMethod] = useState('upi');
@@ -17,6 +17,9 @@ const PaymentForm = () => {
     const [agreed, setAgreed] = useState(false);
     const { authState, logout } = useAuth();
     const { bookingValues, setType, setId, setStartDate, setEndDate, setPrice } = useBookingContext();
+    const location = useLocation();
+    const hotelData = location.state;
+    console.log(hotelData);
 
     const navigate = useNavigate();
 
@@ -28,12 +31,12 @@ const PaymentForm = () => {
 
         // Simulate a successful payment
         setPaymentSuccess(true);
-        await bookFlight()
+        await bookHotels()
 
         setLoading(false);
     };
 
-    const bookFlight = async () => {
+    const bookHotels = async () => {
         try {
             setLoading(true);
 
@@ -41,7 +44,7 @@ const PaymentForm = () => {
 
             const object = await postUserBooking(
                 authState.token,
-                'flight',
+                'hotel',
                 bookingValues.id,
                 bookingValues.startDate,
             );
@@ -160,16 +163,16 @@ const PaymentForm = () => {
                         <Stack>2 seat left</Stack>
                         <Stack direction="row" justifyContent="space-between">
                             <Box>Total price</Box>
-                            <Box>2250</Box>
+                            <Box>{hotelData.hotelData.rooms[0].price}</Box>
                         </Stack>
                         <Divider orientation="horizontal" width="100%" />
                         <Stack direction="row" justifyContent="space-between">
                             <Box>Base fare</Box>
-                            <Box>1550</Box>
+                            <Box>{hotelData.hotelData.rooms[0].costPerNight}</Box>
                         </Stack>
                         <Stack direction="row" justifyContent="space-between">
                             <Box>Taxes and fees</Box>
-                            <Box>2250</Box>
+                            <Box>{hotelData.hotelData.rooms[0].costDetails.baseCost}</Box>
                         </Stack>
                         <Stack direction="row" justifyContent="space-between">
                             <Box>Add ons</Box>
@@ -219,7 +222,7 @@ const PaymentForm = () => {
                 <Stack direction="row" spacing={2}>
                     <Stack>
                         <Typography align='right'>
-                            ₹8,196
+                            {hotelData.hotelData.rooms[0].price}
                         </Typography>
                         <Typography variant='caption' color="#999" align='right'>
                             Total, inclusive of all taxes

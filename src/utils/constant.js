@@ -9,6 +9,7 @@ import SupportIcon from '@mui/icons-material/Support';
 export const categories = [
   { name: 'Flights', icon: <FlightIcon />, },
   { name: 'Hotels', icon: <HotelIcon />, },
+  { name: 'Bus', icon: <BusIcon />, },
   { name: 'Offers', icon: <OfferIcon />, },
   { name: 'My Trips', icon: <WorkIcon />, },
 ];

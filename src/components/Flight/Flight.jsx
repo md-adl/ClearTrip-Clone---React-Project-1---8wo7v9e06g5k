@@ -11,9 +11,9 @@ import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { cities } from "../utils/constant";
+import { cities } from "../../utils/constant";
 import { Link } from 'react-router-dom';
-import { useBookingContext } from "../utils/bookingContext";
+import { useBookingContext } from "../../utils/bookingContext";
 
 
 export const Flight = () => {

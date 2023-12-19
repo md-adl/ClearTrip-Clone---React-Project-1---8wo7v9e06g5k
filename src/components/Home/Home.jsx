@@ -3,8 +3,8 @@ import { Box, Stack, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 import Sidebar from './Sidebar.jsx';
-import Navbar from "./Navbar.jsx";
-import { categories } from "../utils/constant";
+import Navbar from "../Home/Navbar.jsx";
+import { categories } from "../../utils/constant.js";
 
 
 

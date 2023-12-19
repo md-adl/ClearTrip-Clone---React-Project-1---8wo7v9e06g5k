@@ -12,26 +12,28 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import Home from "./components/Home";
-import Flight from "./components/Flight";
-import FlightResult from "./components/FlightResult";
-import ErrorPage from "./components/ErrorPage";
+import Home from "./components/Home/Home.jsx";
+import Flight from "./components/Flight/Flight";
+import FlightResult from "./components/Flight/FlightResult";
+import ErrorPage from "./components/Home/ErrorPage.jsx";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import Hotel from "./components/Hotel";
+import Hotel from "./components/Hotels/Hotel";
 import { AuthProvider } from "./utils/auth";
-import FlightCheckOut from "./components/FlightCheckOut";
-import HotelResult from "./components/HotelResult";
-import HotelDetail from "./components/HotelDetails";
+import FlightCheckOut from "./components/Flight/FlightCheckOut";
+import HotelResult from "./components/Hotels/HotelResult";
 import { BookingContextProvider } from "./utils/bookingContext";
-import PaymentForm from "./components/PaymentForm";
-import UserBookings from "./components/UserBookings";
-import UserProfile from "./components/UserProfile";
-import Account from "./components/Account";
-import HotelDetails from "./components/HotelDetails";
+import PaymentForm from "./components/Flight/PaymentForm.jsx";
+import UserBookings from "./components/Booking/UserBookings.jsx";
+import UserProfile from "./components/Booking/UserProfile.jsx";
+import Account from "./Model/Account.jsx";
+import HotelDetails from "./components/Hotels/HotelDetails";
+import HotelCheckOut from './components/Hotels/HotelCheckOut';
+import PaymentFormhotel from './components/Hotels/PaymentFormhotel'
+import Bus from "./components/Bus/Bus.jsx";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +83,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "bus",
+    element: <Bus/>,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "hotel/result",
     element: <HotelResult />,
     errorElement: <ErrorPage />,
@@ -88,6 +95,16 @@ const router = createBrowserRouter([
   {
     path: "flight/checkout",
     element: <FlightCheckOut />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "hotel/checkout",
+    element: <HotelCheckOut />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "hotel/checkout/payment",
+    element: <PaymentFormhotel />,
     errorElement: <ErrorPage />,
   },
   {

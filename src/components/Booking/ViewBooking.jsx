@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Stack, Button ,Box} from "@mui/material";
-import { profile } from "../utils/constant";
-import Navbar from './Navbar'
+import { profile } from "../../utils/constant";
+import Navbar from '../Home/Navbar'
 import { Link ,Outlet} from "react-router-dom";
 
 const ViewBooking = ({selectedProfile, setSelectedProfile}) => {

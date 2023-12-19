@@ -4,13 +4,13 @@ import {
     AccordionDetails, Typography, CircularProgress, Box, Button, Stack, Collapse, Divider
 } from "@mui/material";
 import { useLocation, Link } from 'react-router-dom';
-import Navbar from "./Navbar.jsx";
-import { searchFlight } from "../utils/fetchFromApi";
+import Navbar from "../Home/Navbar.jsx";
+import { searchFlight } from "../../utils/fetchFromApi.js";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import QueryBuilderOutlinedIcon from "@mui/icons-material/QueryBuilderOutlined";
 import FlightFilterItem from './FlightFilterItem.jsx';
 import AirlinesIcon from '@mui/icons-material/Airlines';
-import { cities } from '../utils/constant.js';
+import { cities } from '../../utils/constant.js';
 
 const FlightResult = () => {
     const [loading, setLoading] = useState(false);

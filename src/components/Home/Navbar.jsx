@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Stack, Button, Avatar, Menu, MenuItem } from '@mui/material';
 import { Link, useNavigate } from "react-router-dom";
-import logo from '../images/Cleartrip-New-Logo.png'
-import LoginModal from "./LoginModal";
-import { useAuth } from "../utils/auth";
-import { getUserBooking } from "../utils/fetchFromApi";
+import logo from '../../images/Cleartrip-New-Logo.png'
+import LoginModal from "../../Model/LoginModal";
+import { useAuth } from "../../utils/auth";
+import { getUserBooking } from "../../utils/fetchFromApi";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 

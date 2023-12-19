@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
-import Sidebar from './Sidebar.jsx';
-import Navbar from "./Navbar.jsx";
-import { accountCategories } from "../utils/constant";
+import Sidebar from '../components/Home/Sidebar.jsx';
+import Navbar from "../components/Home/Navbar.jsx";
+import { accountCategories } from "../utils/constant.js";
 
 
 const Account = () => {

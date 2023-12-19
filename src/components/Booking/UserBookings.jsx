@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getUserBooking } from '../utils/fetchFromApi';
-import { useAuth } from "../utils/auth";
+import { getUserBooking } from '../../utils/fetchFromApi';
+import { useAuth } from "../../utils/auth";
 import {
     Card, Typography, CircularProgress, Box, Button, Stack, Chip, Paper
 } from "@mui/material";
