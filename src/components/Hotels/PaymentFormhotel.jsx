@@ -50,7 +50,7 @@ const PaymentForm = () => {
             );
 
             if (object !== null) {
-                alert("booked successfully")
+                // alert("booked successfully")
             }
         } catch (error) {
             console.error('An error occurred:', error);
