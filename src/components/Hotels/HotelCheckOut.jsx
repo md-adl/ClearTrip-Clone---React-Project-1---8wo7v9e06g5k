@@ -127,26 +127,32 @@ const HotelCheckOut = () => {
   return (
   <Stack>
     <Navbar/>
-    <Stack direction="row" px={20} py={10}>
-      <Box sx={{ width: "70%" }}>
-        <Stepper
-          p={0}
-          activeStep={activeStep}
-          orientation="vertical"
-          sx={{
-            "& .MuiStepConnector-line": {
-              display: "none",
-            },
-            "& .MuiStepContent-root": {
-              border: "none",
-              paddingLeft: "0px",
-              marginLeft: "0px",
-            },
-            "& .MuiStepIcon-root": {
-              fontSize: "2em",
-            },
-          }}
-        >
+    <Stack
+        direction="column"
+        spacing={2}
+        px={{ xs: 2, md: 20 }}
+        py={{ xs: 2, md: 10 }}
+        overflow="hidden"
+      >
+        <Box sx={{ width: '100%' }}>
+          <Stepper
+            p={0}
+            activeStep={activeStep}
+            orientation="vertical"
+            sx={{
+              '& .MuiStepConnector-line': {
+                display: 'none',
+              },
+              '& .MuiStepContent-root': {
+                border: 'none',
+                paddingLeft: '0px',
+                marginLeft: '0px',
+              },
+              '& .MuiStepIcon-root': {
+                fontSize: '2em',
+              },
+            }}
+          >
           <Step key="1">
             <StepLabel>
               <Typography fontSize="25px" marginLeft="10px">
@@ -370,7 +376,7 @@ const HotelCheckOut = () => {
           </Step>
         </Stepper>
       </Box>
-      <Stack sx={{ width: "30%" }} spacing={2}>
+      <Stack sx={{ width: { xs: '100%', md: '30%' } }} spacing={2}>
         <Box sx={{ border: "1px solid #e6e6e6", borderRadius: "5px", p: "5%" }}>
           <Stack direction="row" justifyContent="space-between">
             <Box>Total price</Box>

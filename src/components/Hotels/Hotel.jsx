@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -15,8 +14,8 @@ import { searchHotel } from '../../utils/fetchFromApi';
 const Hotel = () => {
   const [loading, setLoading] = useState(false);
   const [hotelList, SetHotelList] = useState({ data: { hotels: [] } });
-  const [location, setLocation] = useState([cities[0]])
-  // const navigate = useNavigate();
+  const [location, setLocation] = useState([cities[0]]);
+
   const searchAndSetHotelList = async () => {
     try {
       setLoading(true);
@@ -38,44 +37,55 @@ const Hotel = () => {
   };
 
   return (
-    <Stack>
-      <Stack p={5} spacing={2} boxShadow={2}>
+    <Stack p={2} spacing={2} boxShadow={2}>
 
-        <Autocomplete
-          freeSolo
-          onChange={(event, newSource) => {
-            const selectedCity = cities.find((city) => city.name === newSource);
-            if (selectedCity) {
-              setLocation(selectedCity);
-            } else {
-              setLocation('');
-            }
-          }}
-          options={cities.map((option) => option.name)}
-          sx={{ minWidth: 600 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Enter Locality, landark, city or hotel" />
-          )}
-        />
-        <Stack spacing={2} direction="row">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker format='ddd, MMM D'
-              defaultValue={dayjs()}
-              value={dayjs()}
-            />
-          </LocalizationProvider>
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker format='ddd, MMM D'
-              defaultValue={dayjs().add(1, 'day')}
-              value={dayjs().add(1, 'day')}
-            />
-          </LocalizationProvider> */}
-        </Stack>
+      <Autocomplete
+        freeSolo
+        onChange={(event, newSource) => {
+          const selectedCity = cities.find((city) => city.name === newSource);
+          if (selectedCity) {
+            setLocation(selectedCity);
+          } else {
+            setLocation('');
+          }
+        }}
+        options={cities.map((option) => option.name)}
+        sx={{ width: '100%' }}
+        renderInput={(params) => (
+          <TextField {...params} label="Enter Locality, landark, city or hotel" />
+        )}
+      />
 
-        <Button variant="contained" component={Link} to={"/hotel/result"} state={{ location: location.name }}>Search Hotels</Button>
+      <Stack spacing={2} direction={{ xs: 'column', md: 'row' }}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            format='ddd, MMM D'
+            defaultValue={dayjs()}
+            value={dayjs()}
+            sx={{ width: '100%' }}
+          />
+        </LocalizationProvider>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            format='ddd, MMM D'
+            defaultValue={dayjs().add(1, 'day')}
+            value={dayjs().add(1, 'day')}
+            sx={{ width: '100%' }}
+          />
+        </LocalizationProvider> */}
       </Stack>
+
+      <Button
+        variant="contained"
+        component={Link}
+        to={"/hotel/result"}
+        state={{ location: location.name }}
+        sx={{ width: '100%' }}
+      >
+        Search Hotels
+      </Button>
     </Stack>
-  )
+  );
 }
 
-export default Hotel
+export default Hotel;
