@@ -169,9 +169,12 @@ const PaymentForm = ({ route }) => {
   };
 
   return (
-    <Stack>
+    <Stack >
       <Navbar />
-      <Stack px={2} py={2}>
+      <Stack px={2} py={2} sx={{
+            marginLeft: { xs: 0, sm: 0, md: "30px" },
+            padding: { xs: "20px", sm: "20px", md: "50px" },
+          }}>
         <Typography
           variant="h4"
           sx={{ marginBottom: 2, fontSize: { xs: "1.5rem", md: "2rem" } }}
@@ -202,28 +205,32 @@ const PaymentForm = ({ route }) => {
             </Stack>
           </Box>
           <Stack sx={{ width: "100%" }} spacing={2}>
-            <Box
-              sx={{ border: "1px solid #e6e6e6", borderRadius: "5px", p: "5%" }}
-            >
-              <Stack>2 seat left</Stack>
-              <Stack direction="row" justifyContent="space-between">
-                <Box>Total price</Box>
-                <Box>{flightItem.flightItem.ticketPrice}</Box>
-              </Stack>
-              <Divider orientation="horizontal" width="100%" />
-              <Stack direction="row" justifyContent="space-between">
-                <Box>Base fare</Box>
-                <Box>{flightItem.flightItem.ticketPrice - 750}</Box>
-              </Stack>
-              <Stack direction="row" justifyContent="space-between">
-                <Box>Taxes and fees</Box>
-                <Box>750</Box>
-              </Stack>
-              <Stack direction="row" justifyContent="space-between">
-                <Box>Add ons</Box>
-                <Box>Free</Box>
-              </Stack>
-            </Box>
+      <Box
+        sx={{
+          border: "1px solid #e6e6e6",
+          borderRadius: "5px",
+          p: { xs: "2%", sm: "2%", md: "5%" },
+        }}
+      >
+        <Stack>2 seat left</Stack>
+        <Stack direction="row" justifyContent="space-between">
+          <Box>Total price</Box>
+          <Box>{flightItem.flightItem.ticketPrice}</Box>
+        </Stack>
+        <Divider orientation="horizontal" width="100%" />
+        <Stack direction="row" justifyContent="space-between">
+          <Box>Base fare</Box>
+          <Box>{flightItem.flightItem.ticketPrice - 750}</Box>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between">
+          <Box>Taxes and fees</Box>
+          <Box>750</Box>
+        </Stack>
+        <Stack direction="row" justifyContent="space-between">
+          <Box>Add ons</Box>
+          <Box>Free</Box>
+        </Stack>
+      </Box>
             <Box
               sx={{ borderRadius: "5px", p: "5%", backgroundColor: "#F7F7F7" }}
               spacing={2}

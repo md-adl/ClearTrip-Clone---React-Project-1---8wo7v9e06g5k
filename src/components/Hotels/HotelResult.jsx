@@ -66,9 +66,9 @@ const HotelResult = () => {
           <CircularProgress />
         </Stack>
       ) : (
-        <Grid container spacing={2} margin={5} sx={{ overflow: "hidden" }}>
+<Grid container spacing={2} sx={{ overflow: "hidden" }} marginTop={{ xs: 2, sm: 4, md: 6 }}>
           {hotelList.map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index} sx={{ overflow: "hidden" }}>
+           <Grid item xs={12} sm={6} md={3} key={index}>
               <Card sx={{ maxWidth: 300, margin: "auto" }}>
                 <Link
                   to={"/hotel/detail"}
@@ -76,10 +76,11 @@ const HotelResult = () => {
                   component={Link}
                 >
                   <CardMedia
-                    component="img"
-                    alt={item.name}
-                    height="200"
-                    image={item.images[0]}
+                   component="img"
+                   alt={item.name}
+                   height="200"
+                   image={item.images[0]}
+                   sx={{ width: "100%", paddingTop:'5px' }}
                   />
                 </Link>
                 <Stack
@@ -95,7 +96,7 @@ const HotelResult = () => {
                   <Stack direction="column">
                     <Typography
                       variant={{ xs: "h6", sm: "h5", md: "h4" }}
-                      sx={{ overflow: "hidden" }}
+    
                     >
                       {item.name}
                     </Typography>
@@ -114,7 +115,7 @@ const HotelResult = () => {
                     </Typography>
                   </Stack>
                   <Stack direction="column">
-                    <Typography sx={{ overflow: "hidden" }}>
+                    <Typography >
                       <Rating
                         name="custom-icon"
                         defaultValue={3}
