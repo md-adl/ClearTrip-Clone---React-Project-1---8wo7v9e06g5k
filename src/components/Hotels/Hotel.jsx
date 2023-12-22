@@ -37,10 +37,11 @@ const Hotel = () => {
   };
 
   return (
-    <Stack p={2} spacing={2} boxShadow={2}>
+    <Stack p={2} spacing={2} boxShadow={2} sx={{ width: '100%' }}>
 
       <Autocomplete
         freeSolo
+        
         onChange={(event, newSource) => {
           const selectedCity = cities.find((city) => city.name === newSource);
           if (selectedCity) {
