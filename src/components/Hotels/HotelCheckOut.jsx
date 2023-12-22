@@ -54,12 +54,14 @@ const HotelCheckOut = () => {
 
     const errors = {};
 
-    if (userDetail.mobileNumber.trim() === "") {
-      errors.mobileNumber = "Mobile number is required.";
+    const mobileNumberRegex = /^\d{10}$/;
+    if (!mobileNumberRegex.test(userDetail.mobileNumber.trim())) {
+      errors.mobileNumber = "Please enter a valid 10-digit mobile number.";
     }
 
-    if (userDetail.email.trim() === "") {
-      errors.email = "Email is required.";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(userDetail.email.trim())) {
+      errors.email = "Please enter a valid email address.";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -253,6 +255,13 @@ const HotelCheckOut = () => {
                     sx={{ minWidth: "50%", marginBottom: "20px" }}
                     placeholder="Mobile number"
                     required
+                    InputProps={{
+                      inputProps: {
+                        pattern: "\\d{10}",
+                        title: "Please enter a valid 10-digit mobile number.",
+                        type: "number"
+                      },
+                    }}
                   />
                   <InputLabel htmlFor="email">Email</InputLabel>
                   <TextField
@@ -268,6 +277,13 @@ const HotelCheckOut = () => {
                     onChange={handleChange}
                     placeholder="Email"
                     required
+                    InputProps={{
+                      inputProps: {
+                        pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+                        title: "Please enter a valid email address.",
+                      },
+                    }}
+                    
                   />
                 </form>
                 <Box sx={{ mb: 2 }}>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
-import { Button, IconButton, Stack } from "@mui/material";
+import { Button, IconButton, Stack, Grid } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
@@ -13,6 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { cities } from "../../utils/constant";
 import { Link } from "react-router-dom";
 import { useBookingContext } from "../../utils/bookingContext";
+import '../../index.css'
 
 export const Flight = () => {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
@@ -39,95 +40,92 @@ export const Flight = () => {
   }, [departureDate]);
 
   return (
-    <Stack
-      direction="column"
-      p={5}
-      spacing={2}
-      boxShadow={2}
-      sx={{ overflowX: "hidden", width: "100%", maxWidth: "100%" }}
-    >
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <Select
-          value={isRoundTrip ? 1 : 0}
-          onChange={handleRoundTrip}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-        >
-          <MenuItem value={0}>One Way</MenuItem>
-          <MenuItem value={1}>Round Trip</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <Select
-          value={isRoundTrip ? 1 : 0}
-          onChange={handleRoundTrip}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-        >
-          <MenuItem value={0}>One Way</MenuItem>
-          <MenuItem value={1}>Round Trip</MenuItem>
-        </Select>
-      </FormControl>
-      <Autocomplete
-        id="source"
-        freeSolo
-        value={`${source.code} - ${source.name}`}
-        onChange={(event, newSource) => {
-          const selectedCity = cities.find((city) => city.name === newSource);
-          if (selectedCity) {
-            setSource(selectedCity);
-          } else {
-            setSource("");
-          }
-        }}
-        options={cities.map((option) => option.name)}
-        sx={{ minWidth: { md: 300 }, width: "100%" }}
-        renderInput={(params) => <TextField {...params} label="Where from?" />}
-      />
-      <IconButton disableRipple aria-label="swap">
-        <SwapHorizIcon />
-      </IconButton>
-      <Autocomplete
-        id="destination"
-        freeSolo
-        value={`${destination.code} - ${destination.name}`}
-        onChange={(event, newDestination) => {
-          const selectedCity = cities.find(
-            (city) => city.name === newDestination
-          );
-          if (selectedCity) {
-            setDestination(selectedCity);
-          } else {
-            setDestination("");
-          }
-        }}
-        options={cities.map((option) => option.name)}
-        sx={{ minWidth: { md: 300 }, width: "100%" }}
-        renderInput={(params) => <TextField {...params} label="Where to?" />}
-      />
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          format="ddd, MMM D"
-          defaultValue={departureDate}
-          value={departureDate}
-          onChange={(newValue) => {
-            setDepartureDate(newValue);
-          }}
-          sx={{ width: "100%" }}
-        />
-      </LocalizationProvider>
-      <Button
-        variant="contained"
-        component={Link}
-        to="/flight/result"
-        state={{
-          source: source.code,
-          destination: destination.code,
-          day: dayjs(departureDate).format("ddd"),
-        }}
-      >
-        Search Flight
-      </Button>
+    <Stack p={5} boxShadow={2} sx={{ overflow: "hidden", width: "100%", maxWidth: "100%" }}>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12}>
+          <FormControl fullWidth>
+            <Select
+              value={isRoundTrip ? 1 : 0}
+              onChange={handleRoundTrip}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value={0}>One Way</MenuItem>
+              <MenuItem value={1}>Round Trip</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <Autocomplete
+            id="source"
+            freeSolo
+            value={`${source.code} - ${source.name}`}
+            onChange={(event, newSource) => {
+              const selectedCity = cities.find((city) => city.name === newSource);
+              if (selectedCity) {
+                setSource(selectedCity);
+              } else {
+                setSource("");
+              }
+            }}
+            options={cities.map((option) => option.name)}
+            sx={{ width: "100%" }}
+            renderInput={(params) => <TextField {...params} label="Where from?" />}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <IconButton disableRipple aria-label="swap">
+            <SwapHorizIcon />
+          </IconButton>
+        </Grid>
+        <Grid item xs={12}>
+          <Autocomplete
+            id="destination"
+            freeSolo
+            value={`${destination.code} - ${destination.name}`}
+            onChange={(event, newDestination) => {
+              const selectedCity = cities.find((city) => city.name === newDestination);
+              if (selectedCity) {
+                setDestination(selectedCity);
+              } else {
+                setDestination("");
+              }
+            }}
+            options={cities.map((option) => option.name)}
+            sx={{ width: "100%" }}
+            renderInput={(params) => <TextField {...params} label="Where to?" />}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              format="ddd, MMM D"
+              defaultValue={departureDate}
+              value={departureDate}
+              onChange={(newValue) => {
+                setDepartureDate(newValue);
+              }}
+              sx={{ width: "100%" }}
+            />
+          </LocalizationProvider>
+        </Grid>
+        
+        <Grid item xs={12}>
+          <Button
+            variant="contained"
+            fullWidth
+            component={Link}
+            to="/flight/result"
+            state={{
+              source: source.code,
+              destination: destination.code,
+              day: dayjs(departureDate).format("ddd"),
+            }}
+          >
+            Search Flight
+          </Button>
+        </Grid>
+      </Grid>
     </Stack>
   );
 };

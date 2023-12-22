@@ -18,6 +18,10 @@ const LoginModal = ({ open, onClose }) => {
     const { setAuth } = useAuth();
 
     const handleLogin = async () => {
+        if (!email || !password) {
+            setSigninSuccess('Email and password are required.');
+            return;
+        }
 
         try {
             const response = await userLogin(email, password);
@@ -41,7 +45,35 @@ const LoginModal = ({ open, onClose }) => {
     };
 
     const handleSignup = async () => {
+        if (!username || !email || !password) {
+            setSignupSuccess('Username, email, and password are required.');
+            return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setSignupSuccess('Invalid email format.');
+            return;
+        }
+        const minPasswordLength = 6;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+]{6,}$/;
+    
+        if (password.length < minPasswordLength || !passwordRegex.test(password)) {
+            setSignupSuccess(`Password must be at least ${minPasswordLength} characters long and contain at least one letter and one number.`);
+            return;
+        }
 
+        const minUsernameLength = 3;
+        const maxUsernameLength = 20;
+        const usernameRegex = /^[a-zA-Z0-9_]+$/; // Allow only letters, numbers, and underscores
+    
+        if (
+            username.length < minUsernameLength ||
+            username.length > maxUsernameLength ||
+            !usernameRegex.test(username)
+        ) {
+            setSignupSuccess(`Username must be between ${minUsernameLength} and ${maxUsernameLength} characters long and can only contain letters, numbers, and underscores.`);
+            return;
+        }
         try {
             const response = await userSignUp(username, email, password);
 

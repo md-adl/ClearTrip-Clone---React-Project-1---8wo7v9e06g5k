@@ -29,8 +29,14 @@ const PaymentForm = ({ route }) => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const { authState, logout } = useAuth();
-  const { bookingValues, setType, setId, setStartDate, setEndDate, setPrice } =
-    useBookingContext();
+  const {
+    bookingValues,
+    setType,
+    setId,
+    setStartDate,
+    setEndDate,
+    setPrice,
+  } = useBookingContext();
   const location = useLocation();
   const flightItem = location.state;
   console.log(flightItem);
@@ -107,6 +113,7 @@ const PaymentForm = ({ route }) => {
               fullWidth
               value={upiId}
               onChange={(e) => setUpiId(e.target.value)}
+              
               sx={{ marginTop: 1 }}
             />
           </Box>
@@ -148,6 +155,7 @@ const PaymentForm = ({ route }) => {
             value={cardNumber}
             onChange={(e) => setCardNumber(e.target.value)}
             sx={{ marginTop: 1 }}
+            inputProps={{ type: "number" }}
           />
         </div>
       );
@@ -169,12 +177,9 @@ const PaymentForm = ({ route }) => {
   };
 
   return (
-    <Stack >
+    <Stack>
       <Navbar />
-      <Stack px={2} py={2} sx={{
-            marginLeft: { xs: 0, sm: 0, md: "30px" },
-            padding: { xs: "20px", sm: "20px", md: "50px" },
-          }}>
+      <Stack px={2} py={2}>
         <Typography
           variant="h4"
           sx={{ marginBottom: 2, fontSize: { xs: "1.5rem", md: "2rem" } }}
@@ -205,32 +210,32 @@ const PaymentForm = ({ route }) => {
             </Stack>
           </Box>
           <Stack sx={{ width: "100%" }} spacing={2}>
-      <Box
-        sx={{
-          border: "1px solid #e6e6e6",
-          borderRadius: "5px",
-          p: { xs: "2%", sm: "2%", md: "5%" },
-        }}
-      >
-        <Stack>2 seat left</Stack>
-        <Stack direction="row" justifyContent="space-between">
-          <Box>Total price</Box>
-          <Box>{flightItem.flightItem.ticketPrice}</Box>
-        </Stack>
-        <Divider orientation="horizontal" width="100%" />
-        <Stack direction="row" justifyContent="space-between">
-          <Box>Base fare</Box>
-          <Box>{flightItem.flightItem.ticketPrice - 750}</Box>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between">
-          <Box>Taxes and fees</Box>
-          <Box>750</Box>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between">
-          <Box>Add ons</Box>
-          <Box>Free</Box>
-        </Stack>
-      </Box>
+            <Box
+              sx={{
+                border: "1px solid #e6e6e6",
+                borderRadius: "5px",
+                p: { xs: "2%", sm: "2%", md: "5%" },
+              }}
+            >
+              <Stack>2 seat left</Stack>
+              <Stack direction="row" justifyContent="space-between">
+                <Box>Total price</Box>
+                <Box>{flightItem.flightItem.ticketPrice}</Box>
+              </Stack>
+              <Divider orientation="horizontal" width="100%" />
+              <Stack direction="row" justifyContent="space-between">
+                <Box>Base fare</Box>
+                <Box>{flightItem.flightItem.ticketPrice - 750}</Box>
+              </Stack>
+              <Stack direction="row" justifyContent="space-between">
+                <Box>Taxes and fees</Box>
+                <Box>750</Box>
+              </Stack>
+              <Stack direction="row" justifyContent="space-between">
+                <Box>Add ons</Box>
+                <Box>Free</Box>
+              </Stack>
+            </Box>
             <Box
               sx={{ borderRadius: "5px", p: "5%", backgroundColor: "#F7F7F7" }}
               spacing={2}
@@ -326,16 +331,18 @@ const PaymentForm = ({ route }) => {
             spacing={{ xs: 2, md: 0 }}
             justifyContent="space-between"
             alignItems="center"
+            paddingLeft='10px'
           >
             <Stack>
-              <Typography align="center" sx={{ fontSize: "1rem" }}>
+              <Typography align="center" sx={{ fontSize: "1rem" }}  paddingLeft='10px'>
                 {flightItem.flightItem.ticketPrice}
               </Typography>
               <Typography
                 variant="caption"
                 color="#999"
                 align="center"
-                sx={{ fontSize: "0.8rem" }}
+                sx={{ fontSize: "0.8rem", marginRight:'20px' }}
+               
               >
                 Total, inclusive of all taxes
               </Typography>
@@ -343,7 +350,7 @@ const PaymentForm = ({ route }) => {
             <Button
               variant="contained"
               color="primary"
-              sx={{ height: "40px", width: "120px", fontSize: "1rem" }}
+              sx={{ height: "40px", width: "120px", fontSize: "1rem", paddingLeft:'10px' }}
               onClick={handlePayment}
               disabled={
                 !agreed ||
