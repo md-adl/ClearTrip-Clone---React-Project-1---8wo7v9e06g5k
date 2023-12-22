@@ -41,7 +41,7 @@ export const Flight = () => {
 
   return (
     <Stack>
-      <Stack p={5} spacing={2} boxShadow={2}>
+      <Stack p={5} spacing={2} boxShadow={2} style={{ overflowX: "hidden" }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={{ xs: 2, md: 0 }}
