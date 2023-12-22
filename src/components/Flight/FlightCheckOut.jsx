@@ -76,14 +76,24 @@ const FlightCheckOut = () => {
 
     const errors = {};
 
+    const nameRegex = /^[A-Za-z]+$/;
+
+    if (!nameRegex.test(userDetail.firstName.trim())) {
+      errors.firstName = "First name should only contain letters.";
+    }
+  
+    if (!nameRegex.test(userDetail.lastName.trim())) {
+      errors.lastName = "Last name should only contain letters.";
+    }
+  
     if (userDetail.firstName.trim() === "") {
       errors.firstName = "First name is required.";
     }
-
+  
     if (userDetail.lastName.trim() === "") {
       errors.lastName = "Last name is required.";
     }
-
+  
     if (userDetail.gender.trim() === "") {
       errors.gender = "Gender is required.";
     }
@@ -108,11 +118,19 @@ const FlightCheckOut = () => {
   }, [bookingValues.id, flightData.item._id, navigate]);
 
   const handleChange = (e) => {
-    console.log(e);
+    const { name, value } = e.target;
+
     setUserDetail({
       ...userDetail,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+  
+    if (name === "gender") {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "",
+      }));
+    }
   };
 
   const handleNext = () => {

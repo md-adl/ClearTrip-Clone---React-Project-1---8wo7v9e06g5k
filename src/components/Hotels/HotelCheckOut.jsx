@@ -77,17 +77,28 @@ const HotelCheckOut = () => {
 
     const errors = {};
 
+    const nameRegex = /^[A-Za-z]+$/;
+
+    if (!nameRegex.test(userDetail.firstName.trim())) {
+      errors.firstName = "First name should only contain letters.";
+    }
+  
+    if (!nameRegex.test(userDetail.lastName.trim())) {
+      errors.lastName = "Last name should only contain letters.";
+    }
+  
     if (userDetail.firstName.trim() === "") {
       errors.firstName = "First name is required.";
     }
-
+  
     if (userDetail.lastName.trim() === "") {
       errors.lastName = "Last name is required.";
     }
-
+  
     if (userDetail.gender.trim() === "") {
       errors.gender = "Gender is required.";
     }
+
 
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
