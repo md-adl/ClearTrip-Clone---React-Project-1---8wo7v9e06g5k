@@ -1,14 +1,14 @@
 import React from 'react'
-import Navbar from '../Home/Navbar'
 import { Stack } from '@mui/material'
+import BusImage from "../../images/BusImage.png"
 
 const Bus = () => {
   return (
      <Stack>
-         <Navbar/>
-         <Stack>
-            Bus Facilities Coming Soon
-         </Stack>
+         
+         <img src={BusImage} alt="this" width={900} />
+
+      
      </Stack>
   )
 }

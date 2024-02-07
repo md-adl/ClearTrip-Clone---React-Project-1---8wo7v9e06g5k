@@ -1,15 +1,18 @@
 import FlightIcon from '@mui/icons-material/Flight';
 import HotelIcon from '@mui/icons-material/Hotel';
 import BusIcon from '@mui/icons-material/DirectionsBus';
-import OfferIcon from '@mui/icons-material/LocalOffer';
-import WorkIcon from '@mui/icons-material/Work';
-import SupportIcon from '@mui/icons-material/Support';
+import CardTravelIcon from '@mui/icons-material/CardTravel';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 
 
 export const categories = [
   { name: 'Flights', icon: <FlightIcon />, },
   { name: 'Hotels', icon: <HotelIcon />, },
   { name: 'Bus', icon: <BusIcon />, },
+  { name: 'MyTrip', icon: <CardTravelIcon />, },
+  { name: 'Offer', icon: <LocalOfferIcon />, },
+  { name: 'Support', icon: <ContactSupportIcon />, },
  
  
 ];
@@ -17,7 +20,6 @@ export const categories = [
 export const accountCategories = [
   { name: 'Bookings', icon: <FlightIcon />, },
   { name: 'Profile', icon: <HotelIcon />, },
-  { name: 'Logout', icon: <OfferIcon />, },
 ];
 
 export const cities = [

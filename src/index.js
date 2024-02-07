@@ -34,6 +34,9 @@ import HotelDetails from "./components/Hotels/HotelDetails";
 import HotelCheckOut from './components/Hotels/HotelCheckOut';
 import PaymentFormhotel from './components/Hotels/PaymentFormhotel'
 import Bus from "./components/Bus/Bus.jsx";
+import Offer from "./components/Offer/Offer.jsx";
+import Support from "./components/Support/Support.jsx"
+import Mytrip from "./components/MyTrip/Mytrip.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +57,22 @@ const router = createBrowserRouter([
       {
         path: "hotels",
         element: <Hotel />,
+      },
+      {
+        path: "bus",
+        element: <Bus/>
+      },
+      {
+        path: "offer",
+        element: <Offer/>
+      },
+      {
+        path: "support",
+        element: <Support/>
+      },
+      {
+        path: "Mytrip",
+        element: <Mytrip/>
       },
     ],
   },
@@ -82,11 +101,7 @@ const router = createBrowserRouter([
     element: <FlightResult />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "bus",
-    element: <Bus/>,
-    errorElement: <ErrorPage />,
-  },
+ 
   {
     path: "hotel/result",
     element: <HotelResult />,
