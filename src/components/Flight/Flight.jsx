@@ -105,6 +105,7 @@ export const Flight = () => {
               onChange={(newValue) => {
                 setDepartureDate(newValue);
               }}
+              disablePast
               sx={{ width: "100%" }}
             />
           </LocalizationProvider>

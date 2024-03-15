@@ -64,6 +64,7 @@ const Hotel = () => {
             defaultValue={dayjs()}
             value={dayjs()}
             sx={{ width: '100%' }}
+            disablePast
           />
         </LocalizationProvider>
         {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
